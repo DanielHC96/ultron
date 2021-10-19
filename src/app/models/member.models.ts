@@ -6,5 +6,4 @@ export interface Member {
     lastName?: string;
     updatedAt?: Date;
     createdAt?: Date;
-    birth?: Date;
 };

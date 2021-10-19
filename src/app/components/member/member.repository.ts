@@ -1,14 +1,12 @@
 import { Member } from "../../models/member.models";
-
-const list: Member[] = [];
+import model from './member.schema'
 
 function getMembers(){
-    return list;
+    return model.find();
 }
 
 function addMember(member: Member){
-    list.push(member);
-    return member;
+    return model.create(member);
 }
 
 export default {

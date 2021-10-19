@@ -1,9 +1,9 @@
 import { config } from 'dotenv'
 config();
-//import { prefix } from '../config.json';
-import { Client, Message } from 'discord.js';
+import { Client } from 'discord.js';
 import express, { Express } from "express";
 import components from './components';
+import mongooseModule from './modules/mongoose.module'
 
 async function main (){
     //constantes
@@ -12,7 +12,7 @@ async function main (){
     const port: number = parseInt(process.env.PORT || "3000");
 
     //bot ds
-    bot.on("ready", () => { console.log("bot listo") });
+    bot.on("ready", () => { console.log("bot ✅") });
 
     //app use
     app.use(express.json());
@@ -27,9 +27,17 @@ async function main (){
     }
 
     app.listen(port, () => {
-        console.log(`App escuchando en http://localhost:${port}`);
+        console.log(`App escuchando en http://localhost:${port} ✅`);
     });
 
+    try {
+        await mongooseModule.connect();
+        console.log('Database connection successful ✅');
+      } 
+    catch (error) {
+        console.error(error);
+        console.log(`Failed database connection ❌`);
+    }
 };
 
 export default { main };
