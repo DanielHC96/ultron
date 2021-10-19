@@ -1,7 +1,7 @@
 import { config } from 'dotenv'
 config();
 //import { prefix } from '../config.json';
-import { Client } from 'discord.js';
+import { Client, Message } from 'discord.js';
 import express, { Express } from "express";
 import components from './components';
 
