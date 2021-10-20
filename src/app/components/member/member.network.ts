@@ -25,7 +25,18 @@ router.post('/', async(req: Request, res: Response) => {
     catch (error){
         response.error(req, res, 'Invalid information', error, 500);
     }
-
 });
+
+router.patch('/', async(req: Request, res: Response) => {
+    const id: string = req.body._id;
+    const birth: Date = req.body.birth;
+    try{
+        const result: any = await memberController.addBirth(id, birth);
+        response.success(req, res, result, 200);
+    }
+    catch (error){
+        response.error(req, res, 'Invalid information', error, 500);
+    }
+})
 
 export default router;

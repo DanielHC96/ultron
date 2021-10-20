@@ -8,6 +8,7 @@ export interface MemberDoc extends Document {
   lastName?: string;
   updatedAt?: Date;
   createdAt?: Date;
+  birth?: Date;
 };
 
 const schema: Schema<MemberDoc> = new Schema<MemberDoc>({
@@ -16,7 +17,8 @@ const schema: Schema<MemberDoc> = new Schema<MemberDoc>({
   firstName: { type: String, default: null},
   lastName: { type: String, default: null},
   updatedAt: { type: Date },
-  createdAt: { type: Date }
+  createdAt: { type: Date },
+  birth: { type: Date}
 });
 
 schema.index({ discordUserId: 1 });
