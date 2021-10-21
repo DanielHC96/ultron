@@ -29,9 +29,21 @@ router.post('/', async(req: Request, res: Response) => {
 
 router.patch('/', async(req: Request, res: Response) => {
     const id: string = req.body._id;
-    const birth: Date = req.body.birth;
+    const birthday: Date = req.body.birthday;
     try{
-        const result: any = await memberController.addBirth(id, birth);
+        const result: any = await memberController.addBirthday(id, birthday);
+        response.success(req, res, result, 200);
+    }
+    catch (error){
+        response.error(req, res, 'Invalid information', error, 500);
+    }
+})
+
+router.get('/:mes/:dia', async(req: Request, res: Response) => {
+    const month: number = Number(req.params.mes);
+    const day: number = Number(req.params.dia);
+    try{
+        const result: any[] = await memberController.getBirthday(month, day);
         response.success(req, res, result, 200);
     }
     catch (error){
