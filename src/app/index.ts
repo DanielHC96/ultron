@@ -14,11 +14,8 @@ async function main (){
 
     //bot ds
     bot.on("message", (message)=>{
-        if(message.content.startsWith("start")){
-            messageHandler.birthday(message);
-        }
+        messageHandler.birthday(message);
     });
-
 
     //app use
     app.use(express.json());

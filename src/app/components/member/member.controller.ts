@@ -1,7 +1,7 @@
 import { Member } from '../../models/member.models';
 import memberRepository from './member.repository';
 import { Message } from 'discord.js';
-import { resolveObjectURL } from 'buffer';
+import { CronJob } from 'cron';
 
 
 function getMembers(){
@@ -20,12 +20,12 @@ function getBirthday(month: number, day: number){
     return memberRepository.getBirthday(month, day);
 }
 
-async function handlerBirthday(message: Message){
+async function Birthday(message: Message){
     let today = new Date();
     const result: any[] = await memberRepository.handlerBirthday(today);
     if (result.length == 0){
-        console.log('Nadie esta de cumple');
-        //message.channel.send('Nadie esta de cumple');
+        //console.log('Nadie esta de cumple');
+        message.channel.send('Nadie esta de cumple');
     }
     else{
         for (let i in result){
@@ -35,9 +35,24 @@ async function handlerBirthday(message: Message){
             message.channel.send(`El usuario ${firstName} ${lastName} esta de cumpleaños`)
         }
     }
-    //traer todos los member que estan de cumple
-    //saludar segun cumpleaños
-    //englobar todo en una funcion que se ejecute todos los dias (aparte)
+}
+
+let start:number = 0;
+
+async function handlerBirthday(message: Message){
+    if(message.content.startsWith("start")){
+        if(start === 0){
+            message.channel.send(`Ok, voy a saludar a los que estan de cumple`);
+            new CronJob('* * * * *', function() {
+                Birthday(message);
+            }, null, true);
+        }
+        else{
+            message.channel.send(`Ya estoy ejecutando revisando los cumple`);
+        }
+        start++;
+        console.log(`start se ha ejecutado ${start} veces`);
+    }
 }
 
 export default {
