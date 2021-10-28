@@ -14,9 +14,9 @@ async function addBirth(id: string, birthday: Date){
     return member;
 }
 
+//funcion para hacer consulta por metodo http
 async function getBirthday(month: number, day: number){
     let today = new Date(2021, month-1, day);
-    //console.log(`La fecha consultada es ${today}`);
     const docs: any[] = await model.find({
         $expr:{
             $and: [
@@ -28,8 +28,8 @@ async function getBirthday(month: number, day: number){
     return docs;
 }
 
+//funcion que se llama con evento ready
 async function handlerBirthday(today: Date){
-    console.log(`La fecha consultada es ${today}`);
     const docs: any[] = await model.find({
         $expr:{
             $and: [

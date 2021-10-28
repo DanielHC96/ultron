@@ -1,6 +1,6 @@
 import { Member } from '../../models/member.models';
 import memberRepository from './member.repository';
-import { Message } from 'discord.js';
+import { Message, Channel, TextChannel } from 'discord.js';
 import { CronJob } from 'cron';
 
 
@@ -15,44 +15,30 @@ function addMember(member: Member){
 function addBirthday(id: string, birthday: Date){
     return memberRepository.addBirth(id, birthday);
 }
-
+//funcion que llama desde http
 function getBirthday(month: number, day: number){
     return memberRepository.getBirthday(month, day);
 }
-
-async function Birthday(message: Message){
+//funcion que llama handlerBirtday
+async function Birthday(channel: TextChannel){
     let today = new Date();
     const result: any[] = await memberRepository.handlerBirthday(today);
     if (result.length == 0){
-        //console.log('Nadie esta de cumple');
-        message.channel.send('Nadie esta de cumple');
+        channel.send('Nadie cumple años hoy');
     }
     else{
         for (let i in result){
             let firstName: string = result[i].firstName;
             let lastName: string = result[i].lastName;
-            //console.log(`El usuario ${user} esta de cumpleaños`);
-            message.channel.send(`El usuario ${firstName} ${lastName} esta de cumpleaños`)
+            channel.send(`Feliz cumpleaños ${firstName} ${lastName}, pasalo bonito :)`)
         }
     }
 }
-
-let start:number = 0;
-
-async function handlerBirthday(message: Message){
-    if(message.content.startsWith("start")){
-        if(start === 0){
-            message.channel.send(`Ok, voy a saludar a los que estan de cumple`);
-            new CronJob('* * * * *', function() {
-                Birthday(message);
-            }, null, true);
-        }
-        else{
-            message.channel.send(`Ya estoy ejecutando revisando los cumple`);
-        }
-        start++;
-        console.log(`start se ha ejecutado ${start} veces`);
-    }
+//funcion que activa el ciclo
+async function handlerBirthday(channel: TextChannel){
+    new CronJob('* * * * *', function() {
+        Birthday(channel);
+    }, null, true);
 }
 
 export default {

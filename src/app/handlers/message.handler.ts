@@ -1,8 +1,8 @@
-import { Message } from 'discord.js';
+import { Channel, TextChannel } from 'discord.js';
 import memberControler from '../components/member/member.controller'
 
-async function birthday(message: Message){
-    return memberControler.handlerBirthday(message);
+async function birthday(channel: TextChannel){
+    return memberControler.handlerBirthday(channel);
 }
 
 export default {
