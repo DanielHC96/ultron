@@ -1,4 +1,4 @@
-import { Member } from "../../models/member.models";
+import { Member } from "../../models/member.model";
 import model from './member.schema'
 
 function getMembers(){

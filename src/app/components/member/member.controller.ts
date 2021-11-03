@@ -1,6 +1,6 @@
-import { Member } from '../../models/member.models';
+import { Member } from '../../models/member.model';
 import memberRepository from './member.repository';
-import { Message, Channel, TextChannel } from 'discord.js';
+import { TextChannel } from 'discord.js';
 import { CronJob } from 'cron';
 
 
@@ -24,7 +24,7 @@ async function Birthday(channel: TextChannel){
     let today = new Date();
     const result: any[] = await memberRepository.handlerBirthday(today);
     if (result.length == 0){
-        channel.send('Nadie cumple años hoy');
+        //channel.send('Nadie cumple años hoy');
     }
     else{
         for (let i in result){
@@ -36,7 +36,7 @@ async function Birthday(channel: TextChannel){
 }
 //funcion que activa el ciclo
 async function handlerBirthday(channel: TextChannel){
-    new CronJob('* * * * *', function() {
+    new CronJob('10 18 * * *', function() {
         Birthday(channel);
     }, null, true);
 }

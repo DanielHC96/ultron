@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import response from '../../modules/response.module'
 import memberController from './member.controller';
-import { Member } from '../../models/member.models';
+import { Member } from '../../models/member.model';
 
 const router: Router = express.Router();
 

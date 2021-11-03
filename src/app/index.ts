@@ -16,10 +16,9 @@ async function main (){
     //bot ds
     /*
     bot.on("message", (message)=>{
-        messageHandler.birthday(message);
+        messageHandler.addProyectSession(message);
     });*/
 
-    //id '898585026336280620';
     bot.on('ready', async ()=> {
         const channel = await bot.channels.fetch('898585026336280620') as TextChannel;
         //console.log(`Hello from ${channel}!`);
@@ -31,7 +30,7 @@ async function main (){
     app.use(express.json());
     app.use('/api', ...components);
 
-    //login
+    //login bot
     try {
         await bot.login(process.env.DISCORD_TOKEN);
         console.log("bot ✅")
@@ -40,10 +39,12 @@ async function main (){
         console.log('[discord logind]', error);
     }
 
+    //app listen
     app.listen(port, () => {
         console.log(`App escuchando en http://localhost:${port} ✅`);
     });
 
+    //connect database
     try {
         await mongooseModule.connect();
         console.log('Database connection successful ✅');
