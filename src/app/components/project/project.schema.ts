@@ -2,6 +2,7 @@ import { Schema, model, Document} from "mongoose";
 
 export interface ProjectDoc extends Document {
     _id: string;
+    projectName: string;
     member: string;
     time: number;
     start: Date;
@@ -9,6 +10,7 @@ export interface ProjectDoc extends Document {
 };
 
 const schema: Schema<ProjectDoc> = new Schema<ProjectDoc> ({
+    projectName: { type: String},
     member: { type: Schema.Types.ObjectId, ref: 'Member' },
     time: { type: Number },
     start: { type: Date },
