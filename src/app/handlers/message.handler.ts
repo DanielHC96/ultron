@@ -1,17 +1,18 @@
-import { Message, TextChannel } from 'discord.js';
-import memberControler from '../components/member/member.controller'
+import { Message, TextChannel } from 'discord.js'
+import projectController from "../components/project/project.controller";
 
-async function birthday(channel: TextChannel){
-    return memberControler.handlerBirthday(channel);
+function _newProjectSesion(message: Message){
+    return projectController.addProjectSession(message);
 }
 
-//aqui hacer llamada de funcion (message)
-/*
-async function addProyectSession(message: Message) {
-    return
-}*/
+export default async function messageHandler(message: Message) {
+    const channel: TextChannel = message.channel as TextChannel;
 
-export default {
-    birthday
-    //addProyectSession
+    message.content = message.content.trim().toLocaleLowerCase();
+
+    switch (channel.name){
+        case 'registro-proyecto':
+            _newProjectSesion(message);
+        break;
+    }
 }

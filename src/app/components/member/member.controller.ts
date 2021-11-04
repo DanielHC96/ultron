@@ -35,8 +35,8 @@ async function Birthday(channel: TextChannel){
     }
 }
 //funcion que activa el ciclo
-async function handlerBirthday(channel: TextChannel){
-    new CronJob('10 18 * * *', function() {
+function handlerBirthday(channel: TextChannel){
+    new CronJob('0 18 * * *', function() {
         Birthday(channel);
     }, null, true);
 }

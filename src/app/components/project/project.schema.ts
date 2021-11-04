@@ -10,7 +10,7 @@ export interface ProjectDoc extends Document {
 };
 
 const schema: Schema<ProjectDoc> = new Schema<ProjectDoc> ({
-    projectName: { type: String},
+    projectName: { type: String, required: true},
     member: { type: Schema.Types.ObjectId, ref: 'Member' },
     time: { type: Number },
     start: { type: Date },

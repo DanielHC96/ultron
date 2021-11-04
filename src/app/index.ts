@@ -1,10 +1,10 @@
 import { config } from 'dotenv'
 config();
-import Discord from 'discord.js'
-import { Client, Message, TextChannel } from 'discord.js';
+import { Client } from 'discord.js';
 import express, { Express } from "express";
 import components from './components';
 import mongooseModule from './modules/mongoose.module';
+import birthdayHandler from './handlers/birthday.handler'
 import messageHandler from './handlers/message.handler';
 
 async function main (){
@@ -14,17 +14,8 @@ async function main (){
     const port: number = parseInt(process.env.PORT || "3000");
 
     //bot ds
-    /*
-    bot.on("message", (message)=>{
-        messageHandler.addProyectSession(message);
-    });*/
-
-    bot.on('ready', async ()=> {
-        const channel = await bot.channels.fetch('898585026336280620') as TextChannel;
-        //console.log(`Hello from ${channel}!`);
-        messageHandler.birthday(channel);
-
-    });
+    bot.on('ready', ()=> { birthdayHandler(bot) });
+    bot.on("message", messageHandler);
 
     //app use
     app.use(express.json());
