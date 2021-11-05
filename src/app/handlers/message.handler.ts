@@ -8,6 +8,9 @@ function _newProjectSesion(message: Message){
 export default async function messageHandler(message: Message) {
     const channel: TextChannel = message.channel as TextChannel;
 
+    if(message.author.id === '898587523952021565'){
+        return;
+    }
     message.content = message.content.trim().toLocaleLowerCase();
 
     switch (channel.name){
