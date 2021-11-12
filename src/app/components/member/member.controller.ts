@@ -15,6 +15,11 @@ function addMember(member: Member){
 function addBirthday(id: string, birthday: Date){
     return memberRepository.addBirth(id, birthday);
 }
+
+function getMemberByDiscordUserId(discordUserId: string){
+    return memberRepository.getMemberByDiscordUserId(discordUserId);
+}
+
 //funcion que llama desde http
 function getBirthday(month: number, day: number){
     return memberRepository.getBirthday(month, day);
@@ -46,5 +51,6 @@ export default {
     addMember,
     addBirthday,
     getBirthday,
-    handlerBirthday
+    handlerBirthday,
+    getMemberByDiscordUserId
 };

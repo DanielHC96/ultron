@@ -9,9 +9,12 @@ function addMember(member: Member){
     return model.create(member);
 }
 
-async function addBirth(id: string, birthday: Date){
-    const member: Member | null = await model.findOneAndUpdate({_id: id},{birthday: birthday}, {new: true});    
-    return member;
+function addBirth(id: string, birthday: Date){
+    return model.findOneAndUpdate({_id: id},{birthday: birthday}, {new: true});    
+}
+
+function getMemberByDiscordUserId(discordUserId: string) {
+    return model.findOne({discordUserId: discordUserId});
 }
 
 //funcion para hacer consulta por metodo http
@@ -46,5 +49,6 @@ export default {
     addMember,
     addBirth,
     getBirthday,
-    handlerBirthday
+    handlerBirthday,
+    getMemberByDiscordUserId
 }

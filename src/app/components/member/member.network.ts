@@ -37,7 +37,7 @@ router.patch('/', async(req: Request, res: Response) => {
     catch (error){
         response.error(req, res, 'Invalid information', error, 500);
     }
-})
+});
 
 router.get('/:mes/:dia', async(req: Request, res: Response) => {
     const month: number = Number(req.params.mes);
@@ -49,6 +49,17 @@ router.get('/:mes/:dia', async(req: Request, res: Response) => {
     catch (error){
         response.error(req, res, 'Invalid information', error, 500);
     }
-})
+});
+
+router.get('/:discordUserId', async(req: Request, res: Response) => {
+    const discordUserId: string = req.params.discordUserId;
+    try{
+        const result: any = await memberController.getMemberByDiscordUserId(discordUserId);
+        response.success(req, res, result, 200);
+    }
+    catch (error){
+        response.error(req, res, 'Invalid information', error, 500);
+    }
+});
 
 export default router;
