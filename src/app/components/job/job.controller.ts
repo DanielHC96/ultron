@@ -5,11 +5,7 @@ import memberController from "../member/member.controller";
 import { Member } from "../../models/member.model";
 import teamController from "../team/team.controller";
 import { Team } from "../../models/team.model";
-import session from "../session";
 import sessionRepository from "../session/session.repository";
-
-
-
 
 function getJobs(){
     return jobRepository.getJobs();
