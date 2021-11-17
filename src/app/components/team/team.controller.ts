@@ -17,6 +17,10 @@ function addTeam(team: Team){
   return teamRepository.addTeam(team);
 };
 
+function updateTeamMembersOtro(id: string, members: string[]){
+  return teamRepository.updateTeamMembersOtro(id, members);
+};
+
 function updateTeamMembers(id: string, members: string[]){
   return teamRepository.updateTeamMembers(id, members);
 };
@@ -26,5 +30,6 @@ export default {
   getTeam, 
   getTeamByDiscordGuildId,
   addTeam, 
+  updateTeamMembersOtro,
   updateTeamMembers 
 };

@@ -1,14 +1,14 @@
 import { Router } from "express";
 import member from "./member";
 import team from "./team";
-import project from "./project";
-import project2 from "./project2"
+import session from "./session"
+import job from "./job"
 
 const components: Router[] = [
     member,
     team,
-    project,
-    project2
+    session,
+    job
 ];
 
 export default components;

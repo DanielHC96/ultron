@@ -1,8 +1,13 @@
 import { Message, TextChannel } from 'discord.js'
-import projectController from "../components/project/project.controller";
+import jobController from '../components/job/job.controller';
+import sessionController from '../components/session/session.controller';
 
-function _newProjectSesion(message: Message){
-    return projectController.addProjectSession(message);
+function _newSession(message: Message){  
+    return sessionController.addSession(message);
+  }
+
+function _newJobSession(message: Message){
+    return jobController.addJobSession(message);
 }
 
 export default async function messageHandler(message: Message) {
@@ -14,8 +19,12 @@ export default async function messageHandler(message: Message) {
     message.content = message.content.trim().toLocaleLowerCase();
 
     switch (channel.name){
-        case 'registro-proyecto':
-            _newProjectSesion(message);
+        case 'registro-trabajo':
+            _newSession(message);
+        break;
+
+        case 'job-session':
+            _newJobSession(message);
         break;
     }
 }

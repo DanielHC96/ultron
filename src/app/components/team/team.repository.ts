@@ -6,31 +6,31 @@ function getTeams(){
 };
 
 function getTeam(id: string){
-  return model.findOne({ _id: id });
+  return model.findOne({ _id: id }).populate('members');
 };
 
 function getTeamByDiscordGuildId(discordGuildId: string){
-  return model.findOne({ discordGuildId: discordGuildId });
+  return model.findOne({ discordGuildId: discordGuildId }).populate('members');
 };
 
 function addTeam(team: Team){
   return model.create(team);
 };
 
-function buscar(word: any, words: string[]){
-  let palabra: string = word._id;
-  for(let i of words){
-    if(palabra === i.toString()){
+function buscar(idMember: any, idMembers: string[]){
+  let id: string = idMember._id;
+  for(let i of idMembers){
+    if(id === i.toString()){
       return true;
     }
   }
   return false;
 }
 
-async function updateTeamMembers(id: string, newMembers: string[]){
+async function updateTeamMembersOtro(id: string, newMembers: string[]){
   const team: Team | null = await model.findOne({ _id: id });
   let members: string[] = []; 
-  let currentMembers = team?.members;
+  let currentMembers = team?.members;  //miembros actuales
 
   if(currentMembers){
     members = currentMembers;
@@ -49,10 +49,33 @@ async function updateTeamMembers(id: string, newMembers: string[]){
     .populate('members')
 };
 
+async function updateTeamMembers(id: string, newMembers: string[]){
+  const team: Team | null = await model.findOne({ _id: id });
+  let members: string[] = []; 
+  let currentMembers = team?.members;
+
+  if(currentMembers){
+    members = currentMembers;
+
+    for (const member of newMembers) {
+      if( ! members.includes(member)){
+        members.push(member);
+      }
+    }
+  }
+  else {
+    members = newMembers;
+  }
+  
+  return model.findOneAndUpdate({ _id: id }, { members })
+    .populate('members')
+}
+
 export default { 
   getTeams, 
   getTeam, 
   getTeamByDiscordGuildId,
   addTeam, 
-  updateTeamMembers 
+  updateTeamMembersOtro,
+  updateTeamMembers
 };
