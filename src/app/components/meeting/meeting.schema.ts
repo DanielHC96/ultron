@@ -1,7 +1,7 @@
 import { Schema, model, Document } from "mongoose";
 
 export interface MeetingDoc extends Document {
-    _id?: string,
+    _id: string,
     name: string,
     start: Date,
     end: Date

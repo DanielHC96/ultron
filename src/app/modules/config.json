@@ -1,0 +1,6 @@
+{
+    "apiKey": "687ED3FB-0A6F-4647-A561-607C5ELE3CFB",
+    "secretKey": "175adfccfaa12d3d4b32df8824e33242b2d807b0",
+    "apiURL": "https://sandbox.flow.cl/api",
+    "baseURL": "http://localhost:5000"
+  }
